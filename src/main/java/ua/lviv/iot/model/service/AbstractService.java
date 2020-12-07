@@ -3,6 +3,7 @@ package ua.lviv.iot.model.service;
 import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractService<T> {
 	protected abstract JpaRepository<T, Integer> getJpaRepository();
@@ -15,6 +16,7 @@ public abstract class AbstractService<T> {
 		return getJpaRepository().findById(id).orElse(null);
 	}
 
+	@Transactional
 	public T saveToDatabase(T newObject) {
 		return getJpaRepository().save(newObject);
 	}

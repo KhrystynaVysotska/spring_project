@@ -24,7 +24,7 @@ public class AccountType {
 		this.id = id;
 	}
 
-	@Column(name = "type")
+	@Column(name = "type", updatable = true)
 	public String getType() {
 		return type;
 	}

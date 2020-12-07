@@ -1,6 +1,6 @@
 package ua.lviv.iot.model.domain;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "account_owner")
@@ -21,7 +22,8 @@ public class AccountOwner {
 	private String patronym;
 	private String mobileNumber;
 	private String email;
-	private Date birthDate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date birthday;
 	private Address adressByAdressId;
 
 	@Id
@@ -90,12 +92,12 @@ public class AccountOwner {
 	}
 
 	@Column(name = "birth_date")
-	public Date getBirthDate() {
-		return (Date) birthDate.clone();
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = (Date) birthDate.clone();
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	@Override
@@ -117,11 +119,11 @@ public class AccountOwner {
 		} else if (!adressByAdressId.equals(other.adressByAdressId)) {
 			return false;
 		}
-		if (birthDate == null) {
-			if (other.birthDate != null) {
+		if (birthday == null) {
+			if (other.birthday != null) {
 				return false;
 			}
-		} else if (!birthDate.equals(other.birthDate)) {
+		} else if (!birthday.equals(other.birthday)) {
 			return false;
 		}
 		if (email == null) {
@@ -181,7 +183,7 @@ public class AccountOwner {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adressByAdressId == null) ? 0 : adressByAdressId.hashCode());
-		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
+		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
@@ -193,7 +195,7 @@ public class AccountOwner {
 		return result;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "adress_id", referencedColumnName = "id")
 	public Address getAdressByAdressId() {
 		return adressByAdressId;

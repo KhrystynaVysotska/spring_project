@@ -1,6 +1,6 @@
 package ua.lviv.iot.model.domain;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "transfer")
 public class Transfer {
 	private Integer id;
 	private Integer amount;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	private Time time;
 	private String purposeOfPayment;
@@ -45,11 +47,11 @@ public class Transfer {
 
 	@Column(name = "date")
 	public Date getDate() {
-		return (Date) date.clone();
+		return date;
 	}
 
 	public void setDate(Date date) {
-		this.date = (Date) date.clone();
+		this.date = date;
 	}
 
 	@Column(name = "time")

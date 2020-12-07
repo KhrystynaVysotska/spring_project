@@ -1,10 +1,11 @@
 package ua.lviv.iot.model.domain;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "bank")
@@ -14,6 +15,7 @@ public class Bank {
 	private String fullBankName;
 	private String shortBankName;
 	private Integer bankLicenseNumber;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date bankLicenseDate;
 
 	@Id
@@ -64,11 +66,11 @@ public class Bank {
 
 	@Column(name = "bank_license_date")
 	public Date getBankLicenseDate() {
-		return (Date) bankLicenseDate.clone();
+		return bankLicenseDate;
 	}
 
 	public void setBankLicenseDate(Date bankLicenseDate) {
-		this.bankLicenseDate = (Date) bankLicenseDate.clone();
+		this.bankLicenseDate = bankLicenseDate;
 	}
 
 	@Override

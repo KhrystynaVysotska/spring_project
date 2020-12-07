@@ -140,7 +140,7 @@ public class Account {
 		return result;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "pin_code_id", referencedColumnName = "id", nullable = false)
 	public PinCode getPinCodeByPinCodeId() {
 		return pinCodeByPinCodeId;
@@ -150,7 +150,7 @@ public class Account {
 		this.pinCodeByPinCodeId = pinCodeByPinCodeId;
 	}
 
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "account_owner_id", referencedColumnName = "id", nullable = false)
 	public AccountOwner getAccountOwnerByAccountOwnerId() {
 		return accountOwnerByAccountOwnerId;
@@ -160,7 +160,7 @@ public class Account {
 		this.accountOwnerByAccountOwnerId = accountOwnerByAccountOwnerId;
 	}
 
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "bank_identification_code", referencedColumnName = "identification_code", nullable = false)
 	public Bank getBankByBankIdentificationCode() {
 		return bankByBankIdentificationCode;
@@ -170,7 +170,7 @@ public class Account {
 		this.bankByBankIdentificationCode = bankByBankIdentificationCode;
 	}
 
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "currency_id", referencedColumnName = "id")
 	public Currency getCurrencyByCurrencyId() {
 		return currencyByCurrencyId;
@@ -180,7 +180,7 @@ public class Account {
 		this.currencyByCurrencyId = currencyByCurrencyId;
 	}
 
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "account_type_id", referencedColumnName = "id")
 	public AccountType getAccountTypeByAccountTypeId() {
 		return accountTypeByAccountTypeId;
