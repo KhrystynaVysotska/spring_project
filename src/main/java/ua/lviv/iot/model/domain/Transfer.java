@@ -1,7 +1,7 @@
 package ua.lviv.iot.model.domain;
 
 import java.util.Date;
-import java.sql.Time;
+import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ public class Transfer {
 	private Integer amount;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date date;
-	private Time time;
+	private LocalTime time;
 	private String purposeOfPayment;
 	private Account accountBySenderAccountId;
 	private Account accountByRecipientAccountId;
@@ -55,11 +55,11 @@ public class Transfer {
 	}
 
 	@Column(name = "time")
-	public Time getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 

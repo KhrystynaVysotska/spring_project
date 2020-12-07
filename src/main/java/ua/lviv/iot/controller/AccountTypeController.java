@@ -20,6 +20,7 @@ public class AccountTypeController extends AbstractController<AccountType> {
 
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<AccountType> update(@PathVariable("id") Integer id, @RequestBody AccountType body) {
+		body.setId(id);
 		AccountType updatedAccountType = accountTypeService.update(id, body, new AccountType());
 		if (updatedAccountType != null) {
 			return new ResponseEntity<AccountType>(updatedAccountType, HttpStatus.OK);

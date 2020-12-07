@@ -83,7 +83,7 @@ public class Address {
 		return result;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
 	public City getCityByCityId() {
 		return cityByCityId;
@@ -93,7 +93,7 @@ public class Address {
 		this.cityByCityId = cityByCityId;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "street_id", referencedColumnName = "id")
 	public Street getStreetByStreetId() {
 		return streetByStreetId;
@@ -103,7 +103,7 @@ public class Address {
 		this.streetByStreetId = streetByStreetId;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "building_id", referencedColumnName = "id")
 	public Building getBuildingByBuildingId() {
 		return buildingByBuildingId;

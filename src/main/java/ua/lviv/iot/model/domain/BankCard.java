@@ -113,7 +113,7 @@ public class BankCard {
 		return result;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
 	public Account getAccountByAccountId() {
 		return accountByAccountId;
@@ -123,7 +123,7 @@ public class BankCard {
 		this.accountByAccountId = accountByAccountId;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "card_type_id", referencedColumnName = "id")
 	public CardType getCardTypeByCardTypeId() {
 		return cardTypeByCardTypeId;

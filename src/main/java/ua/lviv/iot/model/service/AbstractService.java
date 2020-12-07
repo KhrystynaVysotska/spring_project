@@ -6,24 +6,29 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractService<T> {
-	protected abstract JpaRepository<T, Integer> getJpaRepository();
+
+	private final JpaRepository<T, Integer> repository;
+
+	public AbstractService(JpaRepository<T, Integer> repository) {
+		this.repository = repository;
+	}
 
 	public List<T> findAll() {
-		return getJpaRepository().findAll();
+		return repository.findAll();
 	}
 
 	public T getById(Integer id) {
-		return getJpaRepository().findById(id).orElse(null);
+		return repository.findById(id).orElse(null);
 	}
 
 	@Transactional
 	public T saveToDatabase(T newObject) {
-		return getJpaRepository().save(newObject);
+		return repository.save(newObject);
 	}
 
 	public boolean deleteById(Integer id) {
-		if (getJpaRepository().existsById(id)) {
-			getJpaRepository().deleteById(id);
+		if (repository.existsById(id)) {
+			repository.deleteById(id);
 			return true;
 		} else {
 			return false;
@@ -31,9 +36,9 @@ public abstract class AbstractService<T> {
 	}
 
 	public T update(Integer id, T newObject, T oldObject) {
-		if (getJpaRepository().existsById(id)) {
-			BeanUtils.copyProperties(getJpaRepository().findById(id).get(), oldObject);
-			getJpaRepository().save(newObject);
+		if (repository.existsById(id)) {
+			BeanUtils.copyProperties(repository.findById(id).get(), oldObject);
+			repository.save(newObject);
 		}
 		return oldObject;
 	}
