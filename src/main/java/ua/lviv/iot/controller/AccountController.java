@@ -14,7 +14,7 @@ import ua.lviv.iot.model.service.implementation.AccountService;
 
 @RequestMapping("/accounts")
 @RestController
-public class AccountController extends AbstractController<Account>{
+public class AccountController extends AbstractController<Account> {
 
 	@Autowired
 	private AccountService accountService;

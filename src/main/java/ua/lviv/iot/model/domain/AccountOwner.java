@@ -1,5 +1,6 @@
 package ua.lviv.iot.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "account_owner")
@@ -93,11 +93,11 @@ public class AccountOwner {
 
 	@Column(name = "birth_date")
 	public Date getBirthday() {
-		return birthday;
+		return (Date) birthday.clone();
 	}
 
 	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+		this.birthday = (Date) birthday.clone();
 	}
 
 	@Override

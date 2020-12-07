@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import ua.lviv.iot.model.domain.Building;
 import ua.lviv.iot.model.service.AbstractService;
 import ua.lviv.iot.model.service.implementation.BuildingService;

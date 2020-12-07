@@ -1,5 +1,6 @@
 package ua.lviv.iot.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "bank_card")
@@ -44,11 +44,11 @@ public class BankCard {
 
 	@Column(name = "date_of_expire")
 	public Date getDateOfExpire() {
-		return dateOfExpire;
+		return (Date) dateOfExpire.clone();
 	}
 
 	public void setDateOfExpire(Date dateOfExpire) {
-		this.dateOfExpire = dateOfExpire;
+		this.dateOfExpire = (Date) dateOfExpire.clone();
 	}
 
 	@Override

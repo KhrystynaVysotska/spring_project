@@ -1,7 +1,8 @@
 package ua.lviv.iot.model.domain;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "transfer")
@@ -47,11 +47,11 @@ public class Transfer {
 
 	@Column(name = "date")
 	public Date getDate() {
-		return date;
+		return (Date) date.clone();
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.date = (Date) date.clone();
 	}
 
 	@Column(name = "time")

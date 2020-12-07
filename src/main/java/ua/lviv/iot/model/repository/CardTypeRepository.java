@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ua.lviv.iot.model.domain.CardType;
 
 @Repository
-public interface CardTypeRepository extends JpaRepository<CardType, Integer>{
+public interface CardTypeRepository extends JpaRepository<CardType, Integer> {
 
 }
