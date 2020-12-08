@@ -1,6 +1,5 @@
 package ua.lviv.iot.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,14 +8,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.lviv.iot.model.domain.Transfer;
-import ua.lviv.iot.model.service.AbstractService;
 import ua.lviv.iot.model.service.implementation.TransferService;
 
 @RequestMapping("/transfers")
 @RestController
 public class TransferController extends AbstractController<Transfer> {
-	@Autowired
 	private TransferService transferService;
+
+	public TransferController(TransferService transferService) {
+		super(transferService);
+		this.transferService = transferService;
+	}
 
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Transfer> update(@PathVariable("id") Integer transferId, @RequestBody Transfer transfer) {
@@ -27,10 +29,5 @@ public class TransferController extends AbstractController<Transfer> {
 		} else {
 			return new ResponseEntity<Transfer>(HttpStatus.NOT_FOUND);
 		}
-	}
-
-	@Override
-	protected AbstractService<Transfer> getService() {
-		return transferService;
 	}
 }

@@ -66,11 +66,11 @@ public class Bank {
 
 	@Column(name = "bank_license_date")
 	public Date getBankLicenseDate() {
-		return (Date) bankLicenseDate.clone();
+		return bankLicenseDate;
 	}
 
 	public void setBankLicenseDate(Date bankLicenseDate) {
-		this.bankLicenseDate = (Date) bankLicenseDate.clone();
+		this.bankLicenseDate = bankLicenseDate;
 	}
 
 	@Override

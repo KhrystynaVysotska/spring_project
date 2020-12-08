@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.lviv.iot.model.domain.Currency;
-import ua.lviv.iot.model.service.AbstractService;
 import ua.lviv.iot.model.service.implementation.CurrencyService;
 
 @RequestMapping("/currency")
@@ -17,6 +16,11 @@ import ua.lviv.iot.model.service.implementation.CurrencyService;
 public class CurrencyController extends AbstractController<Currency> {
 	@Autowired
 	private CurrencyService currencyService;
+
+	public CurrencyController(CurrencyService currencyService) {
+		super(currencyService);
+		this.currencyService = currencyService;
+	}
 
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Currency> update(@PathVariable("id") Integer currencyId, @RequestBody Currency currency) {
@@ -27,10 +31,5 @@ public class CurrencyController extends AbstractController<Currency> {
 		} else {
 			return new ResponseEntity<Currency>(HttpStatus.NOT_FOUND);
 		}
-	}
-
-	@Override
-	protected AbstractService<Currency> getService() {
-		return currencyService;
 	}
 }

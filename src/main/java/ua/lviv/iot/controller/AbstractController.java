@@ -11,31 +11,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import ua.lviv.iot.model.service.AbstractService;
 
 public abstract class AbstractController<T> {
-	protected abstract AbstractService<T> getService();
-	
+	private final AbstractService<T> service;
+
+	public AbstractController(AbstractService<T> service) {
+		this.service = service;
+	}
+
 	@GetMapping
 	public List<T> getAll() {
-		return getService().findAll();
+		return service.findAll();
 	}
-	
+
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<T> getById(final @PathVariable("id") Integer id) {
-		T foundedEntity = getService().getById(id);
+		T foundedEntity = service.getById(id);
 		if (foundedEntity != null) {
 			return new ResponseEntity<T>(foundedEntity, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<T>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping
 	public T create(@RequestBody T newEntity) {
-		return getService().saveToDatabase(newEntity);
+		return service.saveToDatabase(newEntity);
 	}
-	
+
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<T> delete(@PathVariable("id") Integer id) {
-		if (getService().deleteById(id)) {
+		if (service.deleteById(id)) {
 			return ResponseEntity.status(HttpStatus.OK).build();
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
